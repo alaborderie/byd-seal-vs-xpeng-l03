@@ -68,7 +68,7 @@ export function Verdict() {
               Six modèles d’IA ont fait la même recherche chacun de leur côté : Claude Opus 5.5, Claude Sonnet 5.5,
               GPT-6.1 Sol, GPT-6.1 Terra, DeepSeek V4.1 Flash et Grok 4.7. Chaque désaccord a ensuite été tranché sur une
               source primaire relue à la main. Données au 28 octobre 2026, prix TTC hors options, aucune des deux voitures
-              n’ouvrant droit au coup de pouce.
+              n’ouvrant droit au coup de pouce (ex-bonus écologique).
             </p>
             <div className="mt-4 flex flex-wrap gap-x-6">
               {[

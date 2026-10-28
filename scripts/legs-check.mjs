@@ -12,4 +12,5 @@ const legs = await page.locator('#road-trip .h-12 > div').evaluateAll((els) =>
 )
 const hidden = legs.filter((t) => t.startsWith('matrix(0,') || t.startsWith('matrix(0, ')).length
 console.log(JSON.stringify({ legs: legs.length, hidden }))
+if (legs.length === 0 || hidden > 0) process.exitCode = 1
 await browser.close()

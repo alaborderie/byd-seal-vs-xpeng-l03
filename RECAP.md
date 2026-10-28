@@ -4,7 +4,7 @@ Marché français, données au 28 octobre 2026. Six modèles ont fait la même r
 
 ## En une phrase
 
-À finition comparable (Design contre Long Range, Excellence contre Performance Ultra), la **Seal** va plus loin par charge et offre plus de puissance, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais elle recharge lentement et coûte plus cher en entrée. Le **L03** est le choix malin : 13 000 € de moins en entrée, une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP. Sur un long trajet, le L03 arrive en général plus tôt grâce à sa recharge rapide, parfois malgré un arrêt de plus.
+À finition comparable (Design contre Long Range, Excellence contre Performance Ultra), la **Seal** va plus loin par charge et offre plus de puissance, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais elle recharge lentement et coûte plus cher en entrée. Le **L03** est le choix malin : 13 000 € de moins en entrée hors remises (environ 6 000 € avec l'offre BYD d'octobre), une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP. Sur un long trajet, le L03 arrive en général plus tôt grâce à sa recharge rapide, parfois malgré un arrêt de plus.
 
 ## Gamme et prix (TTC, hors options)
 
