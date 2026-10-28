@@ -1,0 +1,13 @@
+[Unit]
+Description=BYD Seal vs XPENG L03 comparison site on jarvis:8519
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/jarvis/repositories/byd-seal-vs-xpeng-l03
+ExecStart=/home/jarvis/.nvm/versions/node/v26.12.1/bin/node node_modules/vite/bin/vite.js preview
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
