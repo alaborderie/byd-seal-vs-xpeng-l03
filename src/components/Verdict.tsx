@@ -47,7 +47,7 @@ export function Verdict() {
         index="09"
         eyebrow="Verdict"
         title="Deux bonnes réponses, deux profils"
-        intro="La Seal gagne sur l’autonomie par charge, le coffre, les performances et la sécurité prouvée. Le L03 gagne sur le prix, la recharge et l’équipement, et arrive souvent plus tôt sur un long trajet malgré des arrêts plus fréquents. Le bon choix dépend de ta façon de rouler."
+        intro="À finition comparable (Design contre Long Range, Excellence contre Performance Ultra), la Seal gagne sur l’autonomie par charge, les performances, le coffre et la sécurité prouvée. Le L03 gagne sur le prix, la recharge et l’équipement, et arrive souvent plus tôt sur un long trajet malgré des arrêts plus fréquents. Le bon choix dépend de ta façon de rouler."
       >
         <div className="mb-12 grid grid-cols-2 items-end gap-[2vw]">
           <motion.div {...enter(-60)} className="flex justify-end">

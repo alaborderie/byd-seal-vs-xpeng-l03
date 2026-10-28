@@ -134,7 +134,7 @@ export const seal: Car = {
     'Malle de berline moins pratique qu’un hayon',
   ],
   pickIf: [
-    'Tu veux rouler plus longtemps entre deux charges',
+    'Tu veux rouler plus longtemps entre deux charges (Design : 351 km à 130 km/h)',
     'Tu as besoin d’un grand coffre (485 L + 72 L)',
     'Tu veux une sécurité déjà notée 5 étoiles',
     'Tu veux la garantie batterie la plus longue (250 000 km)',

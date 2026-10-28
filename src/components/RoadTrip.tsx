@@ -130,7 +130,8 @@ export function RoadTrip({ selection }: { selection: Selection }) {
         })}
       </fieldset>
 
-      <div key={destination.id} className="mt-10 grid gap-8">
+      {/* Remount on every input so legs added by a trim change also grow in. */}
+      <div key={`${destination.id}-${sealTrip.trim.id}-${l03Trip.trim.id}`} className="mt-10 grid gap-8">
         {trips.map((trip) => (
           <Timeline
             key={trip.car}
