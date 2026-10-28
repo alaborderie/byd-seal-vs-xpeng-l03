@@ -1,0 +1,43 @@
+import type { Car, CarId, Trim } from '../data/types'
+import { formatEur, formatNumber } from './format'
+
+export type Winner = CarId | 'tie'
+
+export interface Metric {
+  readonly id: string
+  readonly label: string
+  readonly better: 'higher' | 'lower'
+  readonly read: (car: Car, trim: Trim) => number
+  readonly format: (value: number) => string
+}
+
+export const METRICS: readonly Metric[] = [
+  { id: 'price', label: 'Prix', better: 'lower', read: (_, t) => t.priceEur, format: formatEur },
+  { id: 'power', label: 'Puissance', better: 'higher', read: (_, t) => t.powerHp, format: (v) => `${formatNumber(v)} ch` },
+  { id: 'sprint', label: '0 à 100 km/h', better: 'lower', read: (_, t) => t.zeroTo100S, format: (v) => `${formatNumber(v, 1)} s` },
+  { id: 'wltp', label: 'Autonomie WLTP', better: 'higher', read: (_, t) => t.wltpKm, format: (v) => `${formatNumber(v)} km` },
+  {
+    id: 'highway',
+    label: 'Autoroute à 130 km/h (mesuré)',
+    better: 'higher',
+    read: (c) => (c.highwayTest.usableKwh / c.highwayTest.kwhPer100Km) * 100,
+    format: (v) => `${formatNumber(Math.round(v))} km`,
+  },
+  { id: 'charge', label: 'Recharge 10-80 %', better: 'lower', read: (_, t) => t.dc10to80Min, format: (v) => `${formatNumber(v)} min` },
+  { id: 'dc', label: 'Puissance de charge', better: 'higher', read: (_, t) => t.dcPeakKw, format: (v) => `${formatNumber(v)} kW` },
+  { id: 'trunk', label: 'Coffres (arrière + avant)', better: 'higher', read: (c, t) => c.trunkL + t.frunkL, format: (v) => `${formatNumber(v)} L` },
+  { id: 'weight', label: 'Poids à vide', better: 'lower', read: (_, t) => t.weightKg, format: (v) => `${formatNumber(v)} kg` },
+  {
+    id: 'batteryWarranty',
+    label: 'Garantie batterie',
+    better: 'higher',
+    read: (c) => c.batteryWarranty.km,
+    format: (v) => `${formatNumber(v)} km`,
+  },
+]
+
+export function winner(metric: Metric, seal: number, l03: number): Winner {
+  if (seal === l03) return 'tie'
+  const sealAhead = metric.better === 'higher' ? seal > l03 : seal < l03
+  return sealAhead ? 'seal' : 'l03'
+}
