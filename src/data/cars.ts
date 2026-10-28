@@ -65,7 +65,7 @@ export const seal: Car = {
   model: 'Seal',
   body: 'Berline',
   tagline: 'La berline basse et puissante',
-  offer: 'Design à 41 025 € avec l’offre BYD d’octobre 2026',
+  offer: 'Design à 41 025 € avec l’offre BYD d’octobre 2026 (remise de 6 600 € et prime CEE de 365 €, sous conditions)',
   lengthMm: 4_800,
   widthMm: 1_875,
   heightMm: 1_460,

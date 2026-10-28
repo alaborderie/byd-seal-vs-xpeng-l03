@@ -4,7 +4,7 @@ Marché français, données au 28 octobre 2026. Six modèles ont fait la même r
 
 ## En une phrase
 
-La **Seal** va plus loin par charge et offre plus de puissance, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais elle recharge lentement et coûte plus cher en entrée. Le **L03** est le choix malin : 13 000 € de moins en entrée, une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP. Sur un long trajet, le L03 arrive en général plus tôt malgré des arrêts plus fréquents.
+La **Seal** va plus loin par charge et offre plus de puissance, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais elle recharge lentement et coûte plus cher en entrée. Le **L03** est le choix malin : 13 000 € de moins en entrée, une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP. Sur un long trajet, le L03 arrive en général plus tôt grâce à sa recharge rapide, parfois malgré un arrêt de plus.
 
 ## Gamme et prix (TTC, hors options)
 
@@ -104,7 +104,7 @@ La Seal est 15 cm plus longue et 14 cm plus basse. Le L03 est plus large et plus
 
 - **Seal Design** si tu veux rouler plus longtemps entre deux charges (351 km contre 300 km à 130 km/h), un vrai coffre, une sécurité déjà prouvée et la meilleure garantie batterie, et que 37 min de recharge ne te dérangent pas.
 - **Seal Excellence** seulement si les 530 ch, l'intégrale et le HUD comptent pour toi.
-- **L03 Long Range** (37 990 €) si le budget compte : c'est la finition la plus rationnelle de la gamme, avec la plus grande autonomie WLTP et une recharge en 20 min. La Standard est moins à l'aise sur autoroute : environ 280 km à 130 km/h contre 335 km pour la Long Range (estimations).
+- **L03 Long Range** (37 990 €) si le budget compte : c'est la finition la plus rationnelle de la gamme, avec la plus grande autonomie WLTP et une recharge en 20 min. La Standard est moins à l'aise sur autoroute : environ 280 km à 130 km/h contre 334 km pour la Long Range (estimations).
 - **L03 Ultra** pour la techno (massage, son 20 HP, XNGP), en sachant que les fonctions de conduite avancées ne sont pas encore livrées en Europe.
 
 ## Ce qui reste à confirmer en concession

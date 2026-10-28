@@ -33,6 +33,11 @@ describe('highwayProfile', () => {
     expect(standard.charge10to80Min).toBeCloseTo(21.5, 5)
     expect(highwayRangeKm(standard)).toBeLessThan(highwayRangeKm(highwayProfile(l03, trim(l03, 'long-range'))))
   })
+
+  it('scales the measured charge time by the official 10-80 % ratio', () => {
+    const slower = { ...trim(l03, 'standard'), dc10to80Min: 22 }
+    expect(highwayProfile(l03, slower).charge10to80Min).toBeCloseTo(21.5 * (22 / 20), 5)
+  })
 })
 
 describe('planTrip', () => {
