@@ -10,7 +10,7 @@ const SECONDS_PER_MINUTE = 0.25
 const FROM_SOC = 0.1
 const TO_SOC = 0.8
 
-function ChargingBattery({ car, trim, run }: { car: CarId; trim: Trim; run: number }) {
+function ChargingBattery({ car, trim, run }: { car: CarId; trim: Trim; run: string | null }) {
   const reduceMotion = useReducedMotion()
   const soc = useMotionValue(FROM_SOC)
   const minutes = useMotionValue(0)
@@ -19,7 +19,7 @@ function ChargingBattery({ car, trim, run }: { car: CarId; trim: Trim; run: numb
   const clock = useTransform(minutes, (value) => `${Math.round(value)} min`)
 
   useEffect(() => {
-    if (reduceMotion || run === 0) {
+    if (reduceMotion || run === null) {
       soc.set(reduceMotion ? TO_SOC : FROM_SOC)
       minutes.set(reduceMotion ? trim.dc10to80Min : 0)
       return
@@ -49,7 +49,7 @@ function ChargingBattery({ car, trim, run }: { car: CarId; trim: Trim; run: numb
         </div>
         <div className="h-6 w-2 rounded-r-md bg-ink/80" />
       </div>
-      <dl className="mt-5 grid grid-cols-2 gap-3 text-sm">
+      <dl className="mt-5 grid gap-3 text-sm sm:grid-cols-2">
         <div>
           <dt className="text-muted">Batterie</dt>
           <dd className="font-display text-base font-semibold tabular">{formatNumber(trim.batteryKwh, 1)} kWh</dd>
@@ -85,7 +85,8 @@ export function Energy({ selection }: { selection: Selection }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-30% 0px' })
   const [replays, setReplays] = useState(0)
-  const run = inView ? replays + 1 : 0
+  // Both batteries restart together whenever either trim changes.
+  const run = inView ? `${replays}-${sealTrim.id}-${l03Trim.id}` : null
   const saved = sealTrim.dc10to80Min - l03Trim.dc10to80Min
 
   return (

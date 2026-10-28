@@ -28,7 +28,7 @@ systemctl --user daemon-reload
 systemctl --user enable --now byd-seal-vs-xpeng-l03
 ```
 
-Après un changement : `pnpm build`, puis `systemctl --user restart byd-seal-vs-xpeng-l03`.
+Le service sert le `dist/` de ce checkout : un build lancé sur une autre branche change le site servi. Après un changement sur `main` : `pnpm build`, puis `systemctl --user restart byd-seal-vs-xpeng-l03`. Le chemin de Node dans l'unité suit la version nvm installée et doit être mis à jour avec elle.
 
 ## Vérifier le rendu
 

@@ -27,7 +27,7 @@ export default function App() {
         <Scoreboard selection={selection} />
         <Performance selection={selection} />
         <Energy selection={selection} />
-        <RoadTrip />
+        <RoadTrip selection={selection} />
         <Size selection={selection} />
         <Equipment selection={selection} />
         <Safety />

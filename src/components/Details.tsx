@@ -3,7 +3,7 @@ import { Check, Minus, ShieldCheck, ShieldQuestion, Star, ThumbsDown, ThumbsUp }
 import { CARS, selectedTrim } from '../data/cars'
 import { EQUIPMENT, type Car, type CarId, type Selection } from '../data/types'
 import { formatNumber } from '../lib/format'
-import { CAR_STYLE, Card, CarName, EASE_OUT, Reveal, Section, Split } from './ui'
+import { CAR_STYLE, Card, CarName, EASE_OUT, GROW, REVEAL_ON_VIEW, Reveal, Section, Split } from './ui'
 
 function EquipmentCell({ car, detail }: { car: CarId; detail: string | null }) {
   const mirrored = car === 'seal'
@@ -65,16 +65,14 @@ function NcapBar({ label, value, car }: { label: string; value: number; car: Car
         <span className="text-muted">{label}</span>
         <span className="font-display font-semibold tabular">{value} %</span>
       </div>
-      <div className="mt-1 h-2 overflow-hidden rounded-full bg-line">
+      <motion.div {...REVEAL_ON_VIEW} className="mt-1 h-2 overflow-hidden rounded-full bg-line">
         <motion.div
           className={`h-full rounded-full ${CAR_STYLE[car].bg}`}
           style={{ width: `${value}%`, originX: 0 }}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
+          variants={GROW}
           transition={{ duration: 0.8, ease: EASE_OUT }}
         />
-      </div>
+      </motion.div>
     </div>
   )
 }
@@ -121,6 +119,9 @@ function SafetyCard({ car }: { car: Car }) {
           <dt className="text-muted">Garantie véhicule</dt>
           <dd className="font-display font-semibold tabular sm:text-right">
             {car.vehicleWarranty.years} ans · {km(car.vehicleWarranty.km)}
+            {car.vehicleWarranty.note && (
+              <span className="block text-xs font-normal text-muted">{car.vehicleWarranty.note}</span>
+            )}
           </dd>
         </div>
         <div className="grid gap-0.5 sm:flex sm:justify-between sm:gap-3">
@@ -179,7 +180,7 @@ export function Press() {
       index="08"
       eyebrow="Ce qu’en dit la presse"
       title="Les essais, résumés"
-      intro="Ce qui revient d’un essai à l’autre chez Automobile Propre, L’argus, Frandroid, Auto Express et Caradisiac. Les essais de la Seal datent surtout de 2023-2024 : le restylage 2026 n’a changé que le coffre et quelques équipements."
+      intro="Ce qui revient d’un essai à l’autre dans la presse française et britannique. Les essais de la Seal datent surtout de 2023-2024 : le restylage 2026 a agrandi le coffre (400 à 485 L) et le coffre avant (53 à 72 L) et ajouté quelques équipements, sans toucher à la batterie ni aux moteurs."
     >
       <Split seal={<Opinions car={CARS.seal} />} l03={<Opinions car={CARS.l03} />} />
     </Section>

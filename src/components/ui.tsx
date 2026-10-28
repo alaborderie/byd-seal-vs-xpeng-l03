@@ -5,10 +5,18 @@ import type { CarId } from '../data/types'
 
 export const CAR_STYLE = {
   seal: { text: 'text-seal', bg: 'bg-seal', soft: 'bg-seal-soft', faded: 'bg-seal/35', border: 'border-t-seal' },
-  l03: { text: 'text-l03-ink', bg: 'bg-l03', soft: 'bg-l03-soft', faded: 'bg-l03/35', border: 'border-t-l03' },
+  l03: { text: 'text-l03-ink', bg: 'bg-l03-ink', soft: 'bg-l03-soft', faded: 'bg-l03/35', border: 'border-t-l03' },
 } as const satisfies Record<CarId, Record<string, string>>
 
 export const EASE_OUT = [0.22, 1, 0.36, 1] as const
+
+/**
+ * Bars grow with `scaleX` from 0, and a zero-width box at the edge of an
+ * `overflow-hidden` track never reports as visible. So the parent watches the
+ * viewport and the bars follow its variant.
+ */
+export const GROW = { hidden: { scaleX: 0 }, shown: { scaleX: 1 } } as const
+export const REVEAL_ON_VIEW = { initial: 'hidden', whileInView: 'shown', viewport: { once: true, margin: '-60px' } } as const
 
 export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
   return (

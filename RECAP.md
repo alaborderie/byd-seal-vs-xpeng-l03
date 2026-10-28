@@ -4,7 +4,7 @@ Marché français, données au 28 octobre 2026. Six modèles ont fait la même r
 
 ## En une phrase
 
-La **Seal** est la routière : plus puissante, plus grande autonomie, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais une recharge lente et un prix d'entrée plus haut. Le **L03** est le choix malin : 13 000 € de moins en entrée, une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP.
+La **Seal** va plus loin par charge et offre plus de puissance, plus de coffre, 5 étoiles Euro NCAP et une meilleure garantie batterie, mais elle recharge lentement et coûte plus cher en entrée. Le **L03** est le choix malin : 13 000 € de moins en entrée, une recharge presque deux fois plus rapide, un hayon et plus d'équipement de série, mais un coffre plus petit, un châssis moins rigoureux et pas encore de note Euro NCAP. Sur un long trajet, le L03 arrive en général plus tôt malgré des arrêts plus fréquents.
 
 ## Gamme et prix (TTC, hors options)
 
@@ -53,7 +53,7 @@ Les deux ont une pompe à chaleur et du V2L 3,3 kW (adaptateur). Ni l'une ni l'a
 - Seal Design (Supertest, mai 2024, 13 °C) : 23,5 kWh/100 km, soit environ **351 km** de 100 à 0 %. Recharge 10-80 % en 36 à 37 min, 48 min avec une batterie déjà chaude. AP la classe « lanterne rouge » du segment en recharge rapide.
 - L03 Performance Ultra (octobre 2026) : 23,5 kWh/100 km, soit environ **300 km**. Recharge 10-80 % en **21 min 30**, pic à 220 kW, moyenne de 153 kW. AP y voit le meilleur résultat de sa base pour une batterie 400 V.
 
-Même consommation sur autoroute : la Seal va plus loin grâce à sa batterie plus grosse, le L03 repart plus vite. Sur Paris-Marseille, le site calcule l'effet des deux.
+Même consommation sur autoroute : la Seal va plus loin grâce à sa batterie plus grosse, le L03 repart plus vite. Sur Paris-Marseille, avec ces deux versions, le calcul du site donne 2 arrêts et environ 1 h 10 de charge pour la Seal, contre 3 arrêts et environ 52 min pour le L03, qui arrive une douzaine de minutes plus tôt. Sur des trajets de moins de 400 km, l'écart s'annule ou tourne à l'avantage de la Seal. C'est une estimation : la charge y est supposée proportionnelle à l'énergie reprise, et les finitions non testées partent de la mesure corrigée de l'écart de consommation WLTP entre finitions.
 
 ## Dimensions et pratique
 
@@ -80,7 +80,7 @@ La Seal est 15 cm plus longue et 14 cm plus basse. Le L03 est plus large et plus
 | Son | Dynaudio 12 HP | XOPERA 9 + 2 HP, 18 + 2 HP et réduction active du bruit sur les Ultra |
 | Sièges avant | Chauffants, ventilés, électriques | Chauffants, ventilés, mémoire, massage sur les Ultra |
 | Toit | Panoramique vitré | Panoramique vitré 1,31 m² |
-| Suspensions | Double triangulation AV, multibras AR, amortissement piloté sur l'Excellence | McPherson AV, multibras AR |
+| Suspensions | Double triangulation AV, multibras AR, amortisseurs à fréquence variable (FSD, mécaniques) sur l'Excellence | McPherson AV, multibras AR |
 | Aides à la conduite | Niveau 2 : régulateur adaptatif, maintien de voie, assistant embouteillage, caméras 360° | Niveau 2 XPILOT. Les Ultra ajoutent XNGP avec changement de voie automatique. Les fonctions avancées sont attendues en Europe en 2027 |
 | Connectivité | 4G, CarPlay et Android Auto sans fil, mises à jour OTA | 5G, CarPlay et Android Auto, OTA |
 
@@ -89,7 +89,7 @@ La Seal est 15 cm plus longue et 14 cm plus basse. Le L03 est plus large et plus
 | | Seal | L03 |
 |---|---|---|
 | Euro NCAP | 5 étoiles (2023) : adulte 89 %, enfant 87 %, usagers vulnérables 82 %, aides 76 % | Pas encore testé. XPENG affiche « Euro NCAP 2027 (en cours de validation) » |
-| Garantie véhicule | 6 ans / 150 000 km | 5 ans / 120 000 km + 2 ans / 40 000 km offerts, soit 7 ans / 160 000 km |
+| Garantie véhicule | 6 ans / 150 000 km | 5 ans / 120 000 km + 2 ans / 40 000 km offerts (offre commerciale), soit 7 ans / 160 000 km |
 | Garantie batterie | 8 ans / 250 000 km, 70 % de capacité garantie | 8 ans / 160 000 km, 70 % de capacité garantie |
 
 ## Ce que disent les essais
@@ -102,9 +102,9 @@ La Seal est 15 cm plus longue et 14 cm plus basse. Le L03 est plus large et plus
 
 ## Pour qui ?
 
-- **Seal Design** si tu fais souvent de longs trajets, que tu veux un vrai coffre, une sécurité déjà prouvée et la meilleure garantie batterie, et que 37 min de recharge ne te dérangent pas.
+- **Seal Design** si tu veux rouler plus longtemps entre deux charges (351 km contre 300 km à 130 km/h), un vrai coffre, une sécurité déjà prouvée et la meilleure garantie batterie, et que 37 min de recharge ne te dérangent pas.
 - **Seal Excellence** seulement si les 530 ch, l'intégrale et le HUD comptent pour toi.
-- **L03 Long Range** (37 990 €) si le budget compte : c'est la finition la plus rationnelle de la gamme, la plus grande autonomie WLTP et une recharge en 20 min.
+- **L03 Long Range** (37 990 €) si le budget compte : c'est la finition la plus rationnelle de la gamme, avec la plus grande autonomie WLTP et une recharge en 20 min. La Standard est moins à l'aise sur autoroute : environ 280 km à 130 km/h contre 335 km pour la Long Range (estimations).
 - **L03 Ultra** pour la techno (massage, son 20 HP, XNGP), en sachant que les fonctions de conduite avancées ne sont pas encore livrées en Europe.
 
 ## Ce qui reste à confirmer en concession

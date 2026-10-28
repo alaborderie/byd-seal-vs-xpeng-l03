@@ -23,9 +23,13 @@ describe('winner', () => {
     expect(winner(metric('wltp'), 520, 520)).toBe('tie')
   })
 
-  it('derives the measured motorway range from the shared test', () => {
+  it('derives the motorway range from the shared test and flags estimates', () => {
     const highway = metric('highway')
+    const l03Performance = l03.trims.find((t) => t.id === 'performance-ultra')
+    if (!l03Performance) throw new Error('missing trim')
     expect(Math.round(highway.read(seal, seal.trims[0]))).toBe(351)
-    expect(Math.round(highway.read(l03, l03.trims[0]))).toBe(300)
+    expect(Math.round(highway.read(l03, l03Performance))).toBe(300)
+    expect(highway.estimated?.(l03, l03.trims[0])).toBe(true)
+    expect(highway.estimated?.(l03, l03Performance)).toBe(false)
   })
 })

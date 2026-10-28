@@ -8,7 +8,7 @@ export const EQUIPMENT = [
   { id: 'frontSeats', label: 'Sièges avant' },
   { id: 'massage', label: 'Massage des sièges' },
   { id: 'roof', label: 'Toit vitré' },
-  { id: 'dampers', label: 'Amortissement piloté' },
+  { id: 'dampers', label: 'Amortisseurs à fréquence variable' },
   { id: 'adas', label: 'Aides à la conduite' },
   { id: 'cameras', label: 'Caméras 360°' },
   { id: 'v2l', label: 'Prise V2L' },
@@ -59,14 +59,14 @@ export type EuroNcap =
 export interface Warranty {
   readonly years: number
   readonly km: number
+  readonly note?: string
 }
 
 /** Automobile Propre's fixed 130 km/h motorway run, the one test both cars share. */
 export interface HighwayTest {
-  readonly trimName: string
+  readonly trimId: string
   readonly year: number
   readonly kwhPer100Km: number
-  readonly usableKwh: number
   readonly charge10to80Min: number
   readonly sourceUrl: string
 }
@@ -82,6 +82,7 @@ export interface Car {
   readonly heightMm: number
   readonly wheelbaseMm: number
   readonly groundClearanceMm: number
+  readonly groundClearanceNote: string
   readonly dragCoefficient: number
   readonly trunkL: number
   readonly trunkOpening: string

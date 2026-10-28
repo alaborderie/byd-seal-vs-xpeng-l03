@@ -4,7 +4,7 @@ import { CARS, selectedTrim } from '../data/cars'
 import type { Car, CarId, Selection } from '../data/types'
 import { formatNumber } from '../lib/format'
 import { CarSilhouette } from './CarSilhouette'
-import { CAR_STYLE, Card, CarName, EASE_OUT, Section, Split } from './ui'
+import { CAR_STYLE, Card, CarName, EASE_OUT, GROW, REVEAL_ON_VIEW, Section, Split } from './ui'
 
 const SEAL_WIDTH_PCT = 62
 const L03_WIDTH_PCT = (SEAL_WIDTH_PCT * CARS.l03.lengthMm) / CARS.seal.lengthMm
@@ -80,7 +80,7 @@ function Cargo({ car, frunkL, maxL }: { car: Car; frunkL: number; maxL: number }
       <p className="text-sm text-muted">
         Volume total <strong className="font-display text-ink tabular">{formatNumber(car.trunkL + frunkL)} L</strong>
       </p>
-      <div className="mt-2 flex h-9 gap-1 overflow-hidden rounded-lg bg-line/50">
+      <motion.div {...REVEAL_ON_VIEW} className="mt-2 flex h-9 gap-1 overflow-hidden rounded-lg bg-line/50">
         {parts.map((part, index) => (
           <motion.div
             key={part.label}
@@ -88,15 +88,13 @@ function Cargo({ car, frunkL, maxL }: { car: Car; frunkL: number; maxL: number }
               index === 0 ? 'text-white' : 'text-ink'
             }`}
             style={{ width: `${(part.liters / maxL) * 100}%`, originX: 0 }}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
+            variants={GROW}
             transition={{ duration: 0.7, delay: index * 0.15, ease: EASE_OUT }}
           >
             {formatNumber(part.liters)} L
           </motion.div>
         ))}
-      </div>
+      </motion.div>
       <p className="mt-2 text-xs text-muted">Arrière puis coffre avant. Ouverture : {car.trunkOpening.toLowerCase()}.</p>
     </div>
   )
@@ -113,7 +111,7 @@ function Dimensions({ car, selection, maxL }: { car: Car; selection: Selection; 
         <Row label="Largeur" value={mm(car.widthMm)} />
         <Row label="Hauteur" value={mm(car.heightMm)} />
         <Row label="Empattement" value={mm(car.wheelbaseMm)} />
-        <Row label="Garde au sol" value={mm(car.groundClearanceMm)} />
+        <Row label="Garde au sol" value={`${mm(car.groundClearanceMm)} (${car.groundClearanceNote})`} />
         <Row label="Cx" value={formatNumber(car.dragCoefficient, 3)} />
         <Row label="Poids à vide" value={`${formatNumber(trim.weightKg)} kg`} />
         <Row label="Remorquage freiné" value={`${formatNumber(trim.towingBrakedKg)} kg`} />

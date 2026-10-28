@@ -1,11 +1,20 @@
 import { motion } from 'motion/react'
 import { Flag, MapPin, Zap } from 'lucide-react'
 import { useState } from 'react'
-import { CARS } from '../data/cars'
-import type { CarId } from '../data/types'
-import { DESTINATIONS, TRIP_RULES, planTrip, type Destination, type TripPlan } from '../lib/roadTrip'
+import { CARS, selectedTrim } from '../data/cars'
+import type { CarId, Selection } from '../data/types'
 import { formatMinutes, formatNumber } from '../lib/format'
-import { CAR_STYLE, CarName, EASE_OUT, Section } from './ui'
+import {
+  DESTINATIONS,
+  TIE_MINUTES,
+  TRIP_RULES,
+  highwayProfile,
+  planTrip,
+  type Destination,
+  type HighwayProfile,
+  type TripPlan,
+} from '../lib/roadTrip'
+import { CAR_STYLE, CarName, EASE_OUT, GROW, REVEAL_ON_VIEW, Section } from './ui'
 
 const CRUISE_KMH = 130
 
@@ -14,17 +23,27 @@ function legMinutes(leg: TripPlan['legs'][number]): number {
 }
 
 function tripMinutes(plan: TripPlan): number {
-  return plan.legs.reduce((sum, leg) => sum + legMinutes(leg), 0)
+  return Math.round(plan.legs.reduce((sum, leg) => sum + legMinutes(leg), 0))
 }
 
-function Timeline({ car, plan, scaleMinutes }: { car: CarId; plan: TripPlan; scaleMinutes: number }) {
+interface TimelineProps {
+  readonly car: CarId
+  readonly trimName: string
+  readonly profile: HighwayProfile
+  readonly plan: TripPlan
+  readonly scaleMinutes: number
+}
+
+function Timeline({ car, trimName, profile, plan, scaleMinutes }: TimelineProps) {
   const style = CAR_STYLE[car]
-  const test = CARS[car].highwayTest
   return (
     <div className="grid gap-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="text-sm">
-          <CarName car={car} /> <span className="text-muted">{test.trimName}</span>
+          <CarName car={car} /> <span className="text-muted">{trimName}</span>{' '}
+          <span className="rounded-full bg-line/70 px-2 py-0.5 text-xs text-muted">
+            {profile.measured ? 'mesuré' : 'estimé'} · {formatNumber(profile.kwhPer100Km, 1)} kWh/100
+          </span>
         </p>
         <p className="text-sm text-muted">
           <strong className={`font-display text-lg tabular ${style.text}`}>
@@ -33,7 +52,7 @@ function Timeline({ car, plan, scaleMinutes }: { car: CarId; plan: TripPlan; sca
           · {formatMinutes(plan.chargeMinutes)} de charge · {formatMinutes(tripMinutes(plan))} au total
         </p>
       </div>
-      <div className="flex h-12 items-stretch gap-0.5 overflow-hidden rounded-xl bg-line/50">
+      <motion.div {...REVEAL_ON_VIEW} className="flex h-12 items-stretch gap-0.5 overflow-hidden rounded-xl bg-line/50">
         {plan.legs.map((leg, index) => (
           <motion.div
             // Legs are positional and never reorder.
@@ -43,28 +62,31 @@ function Timeline({ car, plan, scaleMinutes }: { car: CarId; plan: TripPlan; sca
               leg.kind === 'drive' ? style.soft : `${style.bg} text-white`
             }`}
             style={{ width: `${(legMinutes(leg) / scaleMinutes) * 100}%`, originX: 0 }}
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
+            variants={GROW}
             transition={{ duration: 0.5, delay: index * 0.12, ease: EASE_OUT }}
           >
             {leg.kind === 'charge' && <Zap aria-hidden className="size-4 shrink-0" />}
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   )
 }
 
-export function RoadTrip() {
+export function RoadTrip({ selection }: { selection: Selection }) {
   const [destination, setDestination] = useState<Destination>(DESTINATIONS[3])
-  const plans = {
-    seal: planTrip(CARS.seal.highwayTest, destination.distanceKm),
-    l03: planTrip(CARS.l03.highwayTest, destination.distanceKm),
+  const trip = (car: CarId) => {
+    const trim = selectedTrim(CARS[car], selection)
+    const profile = highwayProfile(CARS[car], trim)
+    const plan = planTrip(profile, destination.distanceKm)
+    return { car, trim, profile, plan, minutes: tripMinutes(plan) }
   }
-  const scaleMinutes = Math.max(tripMinutes(plans.seal), tripMinutes(plans.l03))
-  const delta = Math.round(plans.seal.stopMinutes - plans.l03.stopMinutes)
-  const extraStops = plans.l03.stops - plans.seal.stops
+  const sealTrip = trip('seal')
+  const l03Trip = trip('l03')
+  const trips = [sealTrip, l03Trip]
+  const scaleMinutes = Math.max(sealTrip.minutes, l03Trip.minutes)
+  const delta = sealTrip.minutes - l03Trip.minutes
+  const extraStops = l03Trip.plan.stops - sealTrip.plan.stops
   const reason =
     delta < 0
       ? 'grâce à sa plus grosse batterie'
@@ -78,7 +100,7 @@ export function RoadTrip() {
       index="04"
       eyebrow="Road trip"
       title="Au départ de Paris, à 130 km/h"
-      intro="La grosse batterie de la Seal contre la recharge éclair du L03. Le calcul utilise la consommation mesurée sur autoroute, identique pour les deux : 23,5 kWh/100 km."
+      intro="La grosse batterie de la Seal contre la recharge éclair du L03, avec les finitions choisies en haut de page. Le calcul part des consommations mesurées sur autoroute par Automobile Propre."
     >
       <fieldset className="flex flex-wrap gap-2">
         <legend className="sr-only">Destination</legend>
@@ -109,27 +131,38 @@ export function RoadTrip() {
       </fieldset>
 
       <div key={destination.id} className="mt-10 grid gap-8">
-        <Timeline car="seal" plan={plans.seal} scaleMinutes={scaleMinutes} />
-        <Timeline car="l03" plan={plans.l03} scaleMinutes={scaleMinutes} />
+        {trips.map((trip) => (
+          <Timeline
+            key={trip.car}
+            car={trip.car}
+            trimName={trip.trim.name}
+            profile={trip.profile}
+            plan={trip.plan}
+            scaleMinutes={scaleMinutes}
+          />
+        ))}
       </div>
 
       <p className="mt-8 flex items-start gap-2 text-lg text-pretty" aria-live="polite">
         <Flag aria-hidden className="mt-1 size-5 shrink-0 text-accent" />
         <span>
-          {delta === 0 ? (
-            'Les deux arrivent en même temps.'
+          {Math.abs(delta) <= TIE_MINUTES ? (
+            <>Vers {destination.label}, les deux arrivent quasiment en même temps : l’écart est dans la marge du calcul.</>
           ) : (
             <>
-              Vers {destination.label}, <CarName car={delta > 0 ? 'l03' : 'seal'} /> arrive{' '}
+              Vers {destination.label}, <CarName car={delta > 0 ? 'l03' : 'seal'} /> arrive environ{' '}
               <strong className="font-display tabular">{formatMinutes(Math.abs(delta))}</strong> plus tôt, {reason}.
             </>
           )}
         </span>
       </p>
-      <p className="mt-4 text-sm text-muted">
-        Hypothèses : départ à 100 %, arrivée à 10 %, arrêts de 10 à 80 % avec le dernier écourté, 5 min de manœuvre par arrêt.
-        Mesures Automobile Propre : Seal Design (2024, 82,5 kWh, 37 min de 10 à 80 %) et L03 Performance Ultra (2026,
-        70,4 kWh nets, 21 min 30).
+      <p className="mt-4 text-sm text-pretty text-muted">
+        Hypothèses : départ à 100 %, arrivée à 10 %, arrêts de 10 à 80 % avec le dernier écourté, 5 min de manœuvre par
+        arrêt. Le temps de charge est proportionnel à l’énergie reprise, comme si la puissance restait à sa moyenne de
+        session : la vraie courbe varie, surtout batterie chaude. Mesures Automobile Propre : Seal Design (2024, 23,5
+        kWh/100 km, 37 min de 10 à 80 %) et L03 Performance Ultra (2026, 23,5 kWh/100 km, 21 min 30). Les autres finitions
+        sont estimées : même carrosserie, donc même aérodynamique, corrigée de l’écart de consommation WLTP, et temps
+        de charge au prorata du temps officiel.
       </p>
     </Section>
   )

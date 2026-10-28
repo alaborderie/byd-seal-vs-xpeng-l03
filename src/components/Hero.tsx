@@ -83,14 +83,16 @@ export function Hero() {
         </motion.div>
         </motion.div>
 
-        <motion.a
-          href="#match"
-          style={{ opacity: cueOpacity }}
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-sm text-muted"
-        >
-          Défiler
-          <ChevronDown aria-hidden className="size-5 motion-safe:animate-bounce" />
-        </motion.a>
+        {!reduceMotion && (
+          <motion.a
+            href="#match"
+            style={{ opacity: cueOpacity }}
+            className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-sm text-muted"
+          >
+            Défiler
+            <ChevronDown aria-hidden className="size-5 motion-safe:animate-bounce" />
+          </motion.a>
+        )}
       </div>
     </section>
   )

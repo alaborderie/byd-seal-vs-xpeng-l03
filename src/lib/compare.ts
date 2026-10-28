@@ -1,5 +1,6 @@
 import type { Car, CarId, Trim } from '../data/types'
 import { formatEur, formatNumber } from './format'
+import { highwayProfile, highwayRangeKm } from './roadTrip'
 
 export type Winner = CarId | 'tie'
 
@@ -9,6 +10,8 @@ export interface Metric {
   readonly better: 'higher' | 'lower'
   readonly read: (car: Car, trim: Trim) => number
   readonly format: (value: number) => string
+  /** True when the value is derived from another trim's measurement. */
+  readonly estimated?: (car: Car, trim: Trim) => boolean
 }
 
 export const METRICS: readonly Metric[] = [
@@ -18,10 +21,11 @@ export const METRICS: readonly Metric[] = [
   { id: 'wltp', label: 'Autonomie WLTP', better: 'higher', read: (_, t) => t.wltpKm, format: (v) => `${formatNumber(v)} km` },
   {
     id: 'highway',
-    label: 'Autoroute à 130 km/h (mesuré)',
+    label: 'Autonomie à 130 km/h',
     better: 'higher',
-    read: (c) => (c.highwayTest.usableKwh / c.highwayTest.kwhPer100Km) * 100,
+    read: (c, t) => highwayRangeKm(highwayProfile(c, t)),
     format: (v) => `${formatNumber(Math.round(v))} km`,
+    estimated: (c, t) => !highwayProfile(c, t).measured,
   },
   { id: 'charge', label: 'Recharge 10-80 %', better: 'lower', read: (_, t) => t.dc10to80Min, format: (v) => `${formatNumber(v)} min` },
   { id: 'dc', label: 'Puissance de charge', better: 'higher', read: (_, t) => t.dcPeakKw, format: (v) => `${formatNumber(v)} kW` },

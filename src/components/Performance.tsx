@@ -10,7 +10,7 @@ import { CAR_STYLE, Card, CarName, Section, Split } from './ui'
 // Constant acceleration: distance grows with the square of time.
 const EASE_IN_QUAD = [0.11, 0, 0.5, 0] as const
 
-function Lane({ car, trim, run }: { car: CarId; trim: Trim; run: number }) {
+function Lane({ car, trim, run }: { car: CarId; trim: Trim; run: string | null }) {
   const reduceMotion = useReducedMotion()
   const progress = useMotionValue(0)
   const elapsed = useMotionValue(0)
@@ -19,7 +19,7 @@ function Lane({ car, trim, run }: { car: CarId; trim: Trim; run: number }) {
   const spin = useTransform(progress, [0, 1], [0, 1800])
 
   useEffect(() => {
-    if (reduceMotion || run === 0) {
+    if (reduceMotion || run === null) {
       const done = reduceMotion ? 1 : 0
       progress.set(done)
       elapsed.set(done * trim.zeroTo100S)
@@ -85,7 +85,8 @@ export function Performance({ selection }: { selection: Selection }) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-30% 0px' })
   const [replays, setReplays] = useState(0)
-  const run = inView ? replays + 1 : 0
+  // Both lanes restart together whenever either trim changes.
+  const run = inView ? `${replays}-${sealTrim.id}-${l03Trim.id}` : null
 
   const gap = Math.abs(sealTrim.zeroTo100S - l03Trim.zeroTo100S)
   const faster = sealTrim.zeroTo100S < l03Trim.zeroTo100S ? 'seal' : 'l03'

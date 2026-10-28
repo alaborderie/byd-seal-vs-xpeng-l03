@@ -3,11 +3,12 @@ import { ChevronLeft, ChevronRight, Equal } from 'lucide-react'
 import { l03, seal, selectedTrim } from '../data/cars'
 import type { CarId, Selection } from '../data/types'
 import { METRICS, winner, type Metric, type Winner } from '../lib/compare'
-import { CAR_STYLE, CarName, EASE_OUT, Reveal, Section } from './ui'
+import { CAR_STYLE, CarName, EASE_OUT, GROW, REVEAL_ON_VIEW, Reveal, Section } from './ui'
 
 interface Row {
   readonly metric: Metric
   readonly values: Readonly<Record<CarId, number>>
+  readonly estimated: Readonly<Record<CarId, boolean>>
   readonly winner: Winner
 }
 
@@ -27,9 +28,7 @@ function Bar({ car, row }: { car: CarId; row: Row }) {
         <motion.div
           className={`h-full rounded-full ${won ? style.bg : style.faded}`}
           style={{ originX: car === 'seal' ? 1 : 0, marginLeft: car === 'seal' ? 'auto' : 0, width: `${scale * 100}%` }}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true, margin: '-60px' }}
+          variants={GROW}
           transition={{ duration: 0.9, ease: EASE_OUT }}
         />
       </div>
@@ -38,6 +37,7 @@ function Bar({ car, row }: { car: CarId; row: Row }) {
           car === 'seal' ? 'text-left' : 'text-right'
         } ${won ? style.text : 'text-muted'}`}
       >
+        {row.estimated[car] && <span title="Estimation">≈ </span>}
         {row.metric.format(row.values[car])}
       </span>
     </div>
@@ -55,7 +55,11 @@ export function Scoreboard({ selection }: { selection: Selection }) {
   const l03Trim = selectedTrim(l03, selection)
   const rows: Row[] = METRICS.map((metric) => {
     const values = { seal: metric.read(seal, sealTrim), l03: metric.read(l03, l03Trim) }
-    return { metric, values, winner: winner(metric, values.seal, values.l03) }
+    const estimated = {
+      seal: metric.estimated?.(seal, sealTrim) ?? false,
+      l03: metric.estimated?.(l03, l03Trim) ?? false,
+    }
+    return { metric, values, estimated, winner: winner(metric, values.seal, values.l03) }
   })
   const tally = (car: CarId) => rows.filter((row) => row.winner === car).length
 
@@ -73,9 +77,12 @@ export function Scoreboard({ selection }: { selection: Selection }) {
           <span className="text-xs text-muted">{sealTrim.name}</span>
         </div>
         <p className="text-5xl font-bold tabular md:text-7xl" aria-live="polite">
-          <span className={CAR_STYLE.seal.text}>{tally('seal')}</span>
-          <span className="mx-3 text-line">:</span>
-          <span className={CAR_STYLE.l03.text}>{tally('l03')}</span>
+          <span className="sr-only">
+            Seal {tally('seal')} critères, L03 {tally('l03')} critères.
+          </span>
+          <span aria-hidden className={CAR_STYLE.seal.text}>{tally('seal')}</span>
+          <span aria-hidden className="mx-3 text-line">:</span>
+          <span aria-hidden className={CAR_STYLE.l03.text}>{tally('l03')}</span>
         </p>
         <div>
           <CarName car="l03" className="block text-sm md:text-base" />
@@ -84,7 +91,7 @@ export function Scoreboard({ selection }: { selection: Selection }) {
       </Reveal>
       <ul className="space-y-5 md:space-y-6">
         {rows.map((row) => (
-          <li key={row.metric.id}>
+          <motion.li key={row.metric.id} {...REVEAL_ON_VIEW}>
             <p className="mb-2 flex items-center justify-center gap-2 text-center text-sm font-medium text-ink">
               {row.metric.label}
               <Verdict result={row.winner} />
@@ -93,12 +100,12 @@ export function Scoreboard({ selection }: { selection: Selection }) {
               <Bar car="seal" row={row} />
               <Bar car="l03" row={row} />
             </div>
-          </li>
+          </motion.li>
         ))}
       </ul>
       <p className="mt-8 text-center text-sm text-muted">
-        Autoroute à 130 km/h : mesures d’Automobile Propre sur la Seal Design (2024) et le L03 Performance Ultra (2026),
-        les mêmes quelle que soit la finition choisie.
+        Autonomie à 130 km/h : mesurée par Automobile Propre sur la Seal Design (2024) et le L03 Performance Ultra
+        (2026). Pour les autres finitions (≈), la mesure est corrigée de l’écart de consommation WLTP entre les finitions.
       </p>
     </Section>
   )
