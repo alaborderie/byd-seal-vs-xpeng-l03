@@ -15,7 +15,7 @@ pnpm test         # calcul du road trip et choix du gagnant de chaque critère
 pnpm typecheck && pnpm lint
 ```
 
-Toutes les données vivent dans [`src/data/cars.ts`](src/data/cars.ts). Les composants ne contiennent aucun chiffre en dur : changer une valeur là-bas met à jour le tableau d'affichage, les courses, le road trip et les fiches.
+Les données vivent dans [`src/data/cars.ts`](src/data/cars.ts) : changer une valeur là-bas met à jour le tableau d'affichage, les courses, le road trip et les fiches. Quelques phrases citent encore des mesures d'essai en toutes lettres (sections recharge, road trip et équipements) : à relire si une mesure change.
 
 ## Servir sur Jarvis (port 8519)
 

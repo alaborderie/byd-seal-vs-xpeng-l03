@@ -105,8 +105,8 @@ export function Energy({ selection }: { selection: Selection }) {
             <span>
               {saved > 0 ? (
                 <>
-                  <CarName car="l03" /> rend la main <strong className="font-display tabular">{saved} min</strong> plus tôt
-                  à chaque arrêt.
+                  Sur les temps annoncés, <CarName car="l03" /> rend la main{' '}
+                  <strong className="font-display tabular">{saved} min</strong> plus tôt à chaque arrêt.
                 </>
               ) : (
                 <>

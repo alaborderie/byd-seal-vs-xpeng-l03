@@ -27,7 +27,7 @@ export const METRICS: readonly Metric[] = [
     format: (v) => `${formatNumber(Math.round(v))} km`,
     estimated: (c, t) => !highwayProfile(c, t).measured,
   },
-  { id: 'charge', label: 'Recharge 10-80 %', better: 'lower', read: (_, t) => t.dc10to80Min, format: (v) => `${formatNumber(v)} min` },
+  { id: 'charge', label: 'Recharge 10-80 % (annoncée)', better: 'lower', read: (_, t) => t.dc10to80Min, format: (v) => `${formatNumber(v)} min` },
   { id: 'dc', label: 'Puissance de charge', better: 'higher', read: (_, t) => t.dcPeakKw, format: (v) => `${formatNumber(v)} kW` },
   { id: 'trunk', label: 'Coffres (arrière + avant)', better: 'higher', read: (c, t) => c.trunkL + t.frunkL, format: (v) => `${formatNumber(v)} L` },
   { id: 'weight', label: 'Poids à vide', better: 'lower', read: (_, t) => t.weightKg, format: (v) => `${formatNumber(v)} kg` },

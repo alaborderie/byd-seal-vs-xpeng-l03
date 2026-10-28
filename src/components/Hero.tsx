@@ -8,7 +8,7 @@ import { CarSilhouette } from './CarSilhouette'
 import { CAR_STYLE } from './ui'
 
 function HeroStats({ car }: { car: CarId }) {
-  const { brand, model, body, tagline, trims } = CARS[car]
+  const { brand, model, body, tagline, offer, trims } = CARS[car]
   const from = Math.min(...trims.map((trim) => trim.priceEur))
   return (
     <div className={car === 'seal' ? 'text-right' : 'text-left'}>
@@ -18,6 +18,7 @@ function HeroStats({ car }: { car: CarId }) {
       <p className="mt-1 text-sm font-medium tracking-wide text-muted uppercase">{body}</p>
       <p className="mt-3 hidden text-base text-pretty text-ink md:block">{tagline}</p>
       <p className="mt-2 font-display text-lg font-semibold tabular md:text-xl">dès {formatEur(from)}</p>
+      {offer && <p className="mt-1 text-xs text-muted md:text-sm">{offer}</p>}
     </div>
   )
 }

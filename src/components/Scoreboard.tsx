@@ -37,6 +37,7 @@ function Bar({ car, row }: { car: CarId; row: Row }) {
           car === 'seal' ? 'text-left' : 'text-right'
         } ${won ? style.text : 'text-muted'}`}
       >
+        <span className="sr-only">{car === 'seal' ? 'Seal' : 'L03'} : </span>
         {row.estimated[car] && <span title="Estimation">≈ </span>}
         {row.metric.format(row.values[car])}
       </span>

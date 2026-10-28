@@ -34,7 +34,7 @@ const l03UltraEquipment: Equipment = {
   ...l03Equipment,
   audio: 'XOPERA, 18 + 2 haut-parleurs, réduction active du bruit',
   massage: 'Sièges avant',
-  adas: 'XNGP : changement de voie automatique (fonctions avancées attendues en Europe en 2027)',
+  adas: 'Niveau 2 XPILOT + XNGP : changement de voie automatique (fonctions avancées attendues en Europe en 2027)',
 }
 
 const sealDesign: Trim = {
@@ -65,6 +65,7 @@ export const seal: Car = {
   model: 'Seal',
   body: 'Berline',
   tagline: 'La berline basse et puissante',
+  offer: 'Design à 41 025 € avec l’offre BYD d’octobre 2026',
   lengthMm: 4_800,
   widthMm: 1_875,
   heightMm: 1_460,
@@ -138,6 +139,7 @@ export const seal: Car = {
     'Tu veux une sécurité déjà notée 5 étoiles',
     'Tu veux la garantie batterie la plus longue (250 000 km)',
     'Tu cherches les performances (530 ch en Excellence)',
+    'Des arrêts de 37 min pour recharger ne te dérangent pas',
   ],
 }
 
@@ -253,7 +255,7 @@ export const l03: Car = {
     'Pas de vrai mode one-pedal, alertes de vigilance insistantes',
   ],
   pickIf: [
-    'Ton budget compte : 13 000 € de moins en entrée',
+    'Ton budget compte : 13 000 € de moins en entrée, hors remises',
     'Tu veux recharger vite et arriver plus tôt en voyage',
     'Tu préfères la position haute et le hayon',
     'Tu veux le plus d’équipement par euro',

@@ -28,11 +28,11 @@ Typographie : Space Grotesk pour les titres et les chiffres (`tabular-nums`), In
 3. **Le match.** Diagramme papillon : une ligne par critère, la barre de la Seal pousse vers la gauche, celle du L03 vers la droite, le centre marque le gagnant.
 4. **Course 0-100.** Deux couloirs, durée réelle de chaque finition.
 5. **Charge 10-80 %.** Deux batteries se remplissent, une minute réelle vaut un quart de seconde.
-6. **Road trip.** Paris vers Lyon, Bordeaux, Marseille ou Nice à 130 km/h, avec les mesures d'Automobile Propre. Frise des trajets et des arrêts pour chaque voiture.
+6. **Road trip.** Paris vers Nantes, Lyon, Bordeaux, Marseille ou Nice à 130 km/h, à partir des mesures d'Automobile Propre et pour les finitions choisies. Frise des trajets et des arrêts pour chaque voiture.
 7. **Gabarit.** Les deux silhouettes se superposent à l'échelle, cotes à l'appui, puis les volumes de coffre.
 8. **Équipements, sécurité, presse, verdict, sources.**
 
-Durées : 200 à 300 ms pour les micro-interactions, 500 à 700 ms pour les entrées de section, montée de 24 px. Les barres utilisent `scaleX`, jamais `width`. Avec `prefers-reduced-motion`, toutes les scènes s'affichent dans leur état final et les courses montrent directement le résultat.
+Durées : 200 à 300 ms pour les micro-interactions, 500 à 700 ms pour les entrées de section, montée de 24 px. Les barres ont une largeur fixe et grandissent en `scaleX`, déclenché par leur parent. Avec `prefers-reduced-motion`, toutes les scènes s'affichent dans leur état final et les courses montrent directement le résultat.
 
 ## Responsive
 

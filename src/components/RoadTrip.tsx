@@ -124,7 +124,7 @@ export function RoadTrip({ selection }: { selection: Selection }) {
               />
               <MapPin aria-hidden className="size-4" />
               {option.label}
-              <span className={checked ? 'text-white/80' : 'text-muted'}>{formatNumber(option.distanceKm)} km</span>
+              <span className={checked ? 'text-white' : 'text-muted'}>{formatNumber(option.distanceKm)} km</span>
             </label>
           )
         })}

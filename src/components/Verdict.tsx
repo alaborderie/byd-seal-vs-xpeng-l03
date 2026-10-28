@@ -70,13 +70,21 @@ export function Verdict() {
               source primaire relue à la main. Données au 28 octobre 2026, prix TTC hors options, aucune des deux voitures
               n’ouvrant droit au coup de pouce.
             </p>
-            <a
-              href={`${REPO_URL}/tree/main/research`}
-              className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent hover:underline"
-            >
-              Rapports bruts et récap sur GitHub
-              <ExternalLink aria-hidden className="size-4" />
-            </a>
+            <div className="mt-4 flex flex-wrap gap-x-6">
+              {[
+                { label: 'Récap complet', href: `${REPO_URL}/blob/main/RECAP.md` },
+                { label: 'Rapports bruts', href: `${REPO_URL}/tree/main/research` },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-accent hover:underline"
+                >
+                  {link.label}
+                  <ExternalLink aria-hidden className="size-4" />
+                </a>
+              ))}
+            </div>
           </div>
           <div>
             <p className="font-display text-lg font-semibold">Sources principales</p>

@@ -77,6 +77,8 @@ export interface Car {
   readonly model: string
   readonly body: string
   readonly tagline: string
+  /** A time-limited dealer offer, shown next to the list price. */
+  readonly offer?: string
   readonly lengthMm: number
   readonly widthMm: number
   readonly heightMm: number

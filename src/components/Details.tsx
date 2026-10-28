@@ -47,7 +47,7 @@ export function Equipment({ selection }: { selection: Selection }) {
             transition={{ duration: 0.4, delay: Math.min(index * 0.04, 0.3) }}
           >
             <EquipmentCell car="seal" detail={trims.seal.equipment[item.id]} />
-            <p className="w-20 text-center text-[11px] font-semibold tracking-wide text-muted uppercase md:w-40 md:text-xs">
+            <p className="w-20 text-center text-[11px] font-semibold tracking-wide break-words hyphens-auto text-muted uppercase md:w-40 md:text-xs">
               {item.label}
             </p>
             <EquipmentCell car="l03" detail={trims.l03.equipment[item.id]} />
@@ -89,7 +89,7 @@ function SafetyCard({ car }: { car: Car }) {
             <ShieldCheck aria-hidden className={`size-5 ${CAR_STYLE[car.id].text}`} />
             Euro NCAP {ncap.year}
           </p>
-          <p className="mt-2 flex gap-1" aria-label={`${ncap.stars} étoiles sur 5`}>
+          <p className="mt-2 flex gap-1" role="img" aria-label={`${ncap.stars} étoiles sur 5`}>
             {Array.from({ length: 5 }, (_, index) => (
               <Star
                 key={index}
